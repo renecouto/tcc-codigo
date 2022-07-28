@@ -1,0 +1,8 @@
+.pio
+.vscode
+influxdb-benchmark/config
+influxdb-benchmark/config*
+influxdb-benchmark/data
+influxdb-benchmark/data*
+venv
+target

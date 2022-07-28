@@ -1,0 +1,29 @@
+---
+#https://hub.docker.com/_/influxdb/
+version: "3.3"  # optional since v1.27.0
+services:
+  influxdb3:
+    image: influxdb:2.2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=my-user
+      - DOCKER_INFLUXDB_INIT_PASSWORD=my-password
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-token
+      - DOCKER_INFLUXDB_INIT_ORG=my-org
+      - DOCKER_INFLUXDB_INIT_BUCKET=my-bucket
+      
+    ports:
+      - "8084:8086"
+    volumes:
+      - ./data3:/var/lib/influxdb2
+      - ./config3:/etc/influxdb2
+
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+      # docker run -it -p 1883:1883 -p 9001:9001   -v /home/pessoal/code/tcc/mqtt-example/mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto
